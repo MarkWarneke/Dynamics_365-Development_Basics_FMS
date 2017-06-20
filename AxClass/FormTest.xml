@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>FormTest</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+class FormTest
+{        
+
+    Args                    args;
+    Form                    form;
+    FormRun                 formRun;
+    FormBuildDesign         fbDesign;
+    FormBuildDataSource     fbDS;
+    FormBuildGridControl    fbGrid;
+    FormBuildStringControl  fbStr1;
+    FormBuildStringControl  fbStr2;
+    FormBuildTabControl     fbTab;
+    FormBuildTabPageControl fbTabPage1;
+    FormBuildTabPageControl fbTabPage2;
+    DictTable               dictTable;
+    int                     idx, idx2, idx3;
+    FormControlType fctTabPage = FormControlType::TabPage;
+    FormControlType fctTab     = FormControlType::Tab;
+    FormControlType fctGrid    = FormControlType::Grid;
+    FormControlType fctString  = FormControlType::String;
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>main</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Runs the class with the specified arguments.
+    /// </summary>
+    /// <param name = "_args">The specified arguments.</param>
+    public static void main(Args _args)
+    {
+        
+        FormTest formTest = new FormTest();
+        formTest.run();
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>run</Name>
+				<Source><![CDATA[
+    public void run() 
+    {
+    
+        // Create the form header.
+        
+        form = new Form();
+        
+        // Add a data source to the form.
+        
+        dictTable = new DictTable(tablenum(CustTable));
+        fbDS = form.addDataSource(dictTable.name());
+        fbDS.table(dictTable.id());
+            
+        // Create the form design.
+       
+        fbDesign = form.addDesign("Design");
+        fbDesign.caption("Customer information");
+        
+        // Add tab
+        
+        fbTab = fbDesign.addControl(fctTab, "Summary");
+        
+        // Add tab pages
+        
+        fbTabPage1 = fbTab.addControl(fctTabPage, "Overview");
+        fbTabPage1.caption("Overview");
+            
+        fbTabPage2 = fbTab.addControl(fctTabPage,"General");
+        fbTabPage2.caption("General");
+        
+        // Add grid onto tab 1 and data fields onto grid.
+        
+        fbGrid = fbTabPage1.addControl(fctGrid,"Table Grid");
+        fbGrid.addDataField(fbDS.id(), dictTable.fieldName2Id("AccountNum"));
+        fbGrid.addDataField(fbDS.id(), dictTable.fieldName2Id("CustGroup"));
+        fbGrid.addDataField(fbDS.id(), dictTable.fieldName2Id("Currency"));
+        
+        // Add string fields to tab 2, and assign datasource
+                
+        fbStr1 = fbTabPage2.addControl(fctString,"String 1");
+        fbStr1.dataSource(fbDS.id());
+        fbStr1.dataField(dictTable.fieldName2Id("AccountNum"));
+        fbStr2 = fbTabPage2.addControl(fctString,"String 2");
+        fbStr2.dataSource(fbDS.id());
+        fbStr2.dataField(dictTable.fieldName2Id("CustGroup"));
+        
+        // Create the run-time form.
+                
+        args = new Args();
+        args.object(form);
+        formRun = classfactory.formRunClass(args);
+        formRun.run();
+        formRun.detach();
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxEnum xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>dbfmFuelType</Name>
+	<Label>Fuel Type</Label>
+	<EnumValues>
+		<AxEnumValue>
+			<Name>Gas</Name>
+			<Label>Gas</Label>
+		</AxEnumValue>
+		<AxEnumValue>
+			<Name>Diesel</Name>
+			<Label>Diesel</Label>
+			<Value>1</Value>
+		</AxEnumValue>
+		<AxEnumValue>
+			<Name>Propane</Name>
+			<Label>Propane</Label>
+			<Value>2</Value>
+		</AxEnumValue>
+		<AxEnumValue>
+			<Name>NaturalGas</Name>
+			<Label>NaturalGas</Label>
+			<Value>3</Value>
+		</AxEnumValue>
+		<AxEnumValue>
+			<Name>Electric</Name>
+			<Label>Electric</Label>
+			<Value>4</Value>
+		</AxEnumValue>
+	</EnumValues>
+</AxEnum>

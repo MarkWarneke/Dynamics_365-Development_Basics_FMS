@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>MapTest</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+class MapTest
+{        
+
+    Map mapStateNumber;
+    MapEnumerator mapEnumerator;
+    CustTable custTable;
+
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>main</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Runs the class with the specified arguments.
+    /// </summary>
+    /// <param name = "_args">The specified arguments.</param>
+    public static void main(Args _args)
+    {        
+        MapTest mapTest = new MapTest();
+        mapTest.run();
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>run</Name>
+				<Source><![CDATA[
+    public void run () 
+    {
+        this.mapStateNumber = new Map(Types::String, Types::Integer);
+        this.countMaps();
+        this.mapEnumerator = this.mapStateNumber.getEnumerator();
+        this.enumerateMap();
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>countMaps</Name>
+				<Source><![CDATA[
+    private void countMaps() 
+    {
+        if (this.mapStateNumber == null)
+        {
+            
+        }
+
+        while select custTable
+        {
+            if(this.mapSateNumber.exists(custTable.stateName()) )
+            {
+                int mapCounter = this.mapSateNumber.lookup(custTable.stateName()) + 1;
+                this.mapSateNumber.insert(custTable.stateName(), mapCounter);
+            }
+            else
+            {
+                this.mapSateNumber.insert(custTable.stateName(), 1);
+            }
+        }
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>enumerateMap</Name>
+				<Source><![CDATA[
+    private void enumerateMap() 
+    {
+        if (this.mapEnumerator == null)
+        {
+            
+        }
+
+        while (mapEnumerator.moveNext()) 
+        {
+            info(strFmt("%1 customer is located in %2", this.mapEnumerator.currentValue(), this.mapEnumerator.currentKey()));
+        }
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

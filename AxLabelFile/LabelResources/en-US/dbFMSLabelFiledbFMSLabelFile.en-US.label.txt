@@ -1,0 +1,34 @@
+NewLabel0=Label files created on 06/13/2017 08:53:59 for label file Id dbFMSLabelFiledbFMSLabelFile and language en-US
+ ;Label file comment - see above label
+dbFMS1=Vehicle Type
+ ;DB FMS
+dbFMS2=Car
+ ;New Comment
+dbFMS3=Truck
+ ;New Comment
+dbFMS4=Van
+ ;New Comment
+dbFMS5=SUV
+ ;New Comment
+dbFMS6=Service Type
+ ;New Comment
+dbFMS7=Repair
+ ;New Comment
+dbFMS8=Oil Change
+ ;New Comment
+dbFMS9=Maintenance
+ ;New Comment
+dbFMS10=Registration
+ ;New Comment
+dbFMS11=Fuel Type
+ ;New Comment
+dbFMS12=Gas
+ ;New Comment
+dbFMS13=Diesel
+ ;New Comment
+dbFMS14=Propane
+ ;New Comment
+dbFMS15=Natural Gas
+ ;New Comment
+dbFMS16=Electric
+ ;New Comment

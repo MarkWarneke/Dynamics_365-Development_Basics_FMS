@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>SetTest</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+class SetTest
+{        
+
+    Set setOne;
+    Set setTwo;
+    SetEnumerator setEnumerator;
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>main</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Runs the class with the specified arguments.
+    /// </summary>
+    /// <param name = "_args">The specified arguments.</param>
+    public static void main(Args _args)
+    {        
+
+        SetTest setTest = new SetTest();
+        SetTest.run();
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>run</Name>
+				<Source><![CDATA[
+    private void run ()
+    {
+        this.setOne = new Set(Types::Integer);
+        this.setTwo = new Set(Types::Integer);
+
+        setOne.add(1);
+        setOne.add(2);
+        setOne.add(3);
+
+        setTwo.add(3);
+        setTwo.add(4);
+        setTwo.add(5):
+
+        this.setEnumerator = setOne.getEnumerator();
+        info(strFmt("%1", this.setEnumerator.elements()));
+
+
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

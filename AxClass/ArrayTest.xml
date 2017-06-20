@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>ArrayTest</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+class ArrayTest
+{        
+    
+    Array implementation;
+    
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>addElement</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Adds value to the end of array
+    /// </summary>
+    /// <param name="value">
+    /// Anytype value
+    /// </param>
+    public void addElement(anytype value)
+    {
+        this.value(this.lastIndex()+1,value);
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>arrayScan</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Scans value in array
+    /// </summary>
+    /// <param name="value">
+    /// Anytype value
+    /// </param>
+    /// <returns>
+    /// If value is found among array elements returns index of element,
+    /// otherwise returns zero
+    /// </returns>
+    public int arrayScan(anytype value)
+    {
+        int i;
+        ;
+        for(i = 1; i<= this.lastIndex(); i += 1)
+        {
+            if(this.value(i) == value)
+                return(i);
+        }
+        return 0;
+
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>bubbleSorting</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Implements bubble sorting
+    /// </summary>
+    /// <param name="_desc">
+    /// Sort direction
+    /// </param>
+    /// <returns>
+    /// Returns array after sorting
+    /// </returns>
+    public ArrayTest bubbleSorting(boolean _desc = false)
+    {
+        int                 bound, t, i, j;
+        anytype             tmp;
+        ArrayTest           sort_array = new ArrayTest(this.typeId());
+
+        if (this.lastIndex() > 0)
+        {
+            for (i = 1; i <= this.lastIndex(); i++)
+            {
+                sort_array.addElement(this.value(i));
+            }
+
+            bound = sort_array.lastIndex();
+            t = bound;
+
+            tmp = nullValueBaseType(this.typeId());
+
+            while (t != 0)
+            {
+                t = 0;
+                for (j = 1; j <= bound-1; j++)
+                {
+                    tmp = sort_array.value(j);
+                    if (_desc)
+                    {
+                        if (sort_array.value(j) < sort_array.value(j+1))
+                        {
+                            tmp = sort_array.value(j);
+                            sort_array.value(j, sort_array.value(j+1));
+                            sort_array.value(j+1, tmp);
+                            t = j;
+                        }
+                    }
+                    else
+                    {
+                        if (sort_array.value(j) > sort_array.value(j+1))
+                        {
+                            tmp = sort_array.value(j);
+                            sort_array.value(j, sort_array.value(j+1));
+                            sort_array.value(j+1, tmp);
+                            t = j;
+                        }
+                    }
+                }
+                bound = t;
+            }
+        }
+        return sort_array;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>getArray</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Returns class variable
+    /// </summary>
+    /// <returns>
+    /// Returns <c>Array</c> type value
+    /// </returns>
+    public Array getArray()
+    {
+        return implementation;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>lastIndex</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Returns last index of array
+    /// </summary>
+    /// <returns>
+    /// Returns integer types value
+    /// </returns>
+    int lastIndex()
+    {
+        return implementation.lastIndex();
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>new</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Creates new instance of <c>Array</c> and
+    /// initializes default a certain number of elements
+    /// </summary>
+    /// <param name="_type">
+    /// Type of array's elements
+    /// </param>
+    /// <param name="_noOfInitializeElements">
+    /// Number of elements for initialization
+    /// </param>
+    public void new(Types _type, int _noOfInitializeElements = 0)
+    {
+        int i;
+        implementation = new Array(_type);
+
+        for (i = 1; i <= _noOfInitializeElements; i ++)
+        {
+            this.value(i, nullValueBaseType(_type));
+        }
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>quickSorting</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Implements quick sorting
+    /// </summary>
+    /// <param name="_desc">
+    /// Sort direction
+    /// </param>
+    /// <returns>
+    /// Returns array after sorting
+    /// </returns>
+    #define.ConPos2(2)
+    public ArrayTest quickSorting(boolean _desc = false)
+    {
+        int                 i,j;
+        int                 n,r,m;
+        anytype             tmp, k;
+        container           stack_element = [0,0];
+        container           stack;
+        ArrayTest       sort_array = new ArrayTest(this.typeId());
+
+        if (!this.lastIndex())
+            return sort_array;
+
+        for (i=1; i<=this.lastIndex(); i++)
+        {
+            sort_array.addElement(this.value(i));
+        }
+
+        k   = nullValueBaseType(this.typeId());
+        tmp = nullValueBaseType(this.typeId());
+
+        m = 1;
+
+        if (sort_array.lastIndex() >= m)
+        {
+            n = 1;
+            r = sort_array.lastIndex();
+        }
+
+        while (true)
+        {
+            i = n;
+            j =  r + 1;
+            k = sort_array.value(n);
+            while (true)
+            {
+                i++;
+                if (i<=sort_array.lastIndex())
+                {
+                    if (!_desc)
+                    {
+                        while (sort_array.value(i) < k)
+                        {
+                            if (i<=sort_array.lastIndex()-1)
+                                i++;
+                            else
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        while (sort_array.value(i) > k)
+                        {
+                            if (i<=sort_array.lastIndex()-1)
+                                i++;
+                            else
+                                break;
+                        }
+                    }
+
+                }
+                j--;
+                if (j>=1)
+                {
+                    if (!_desc)
+                    {
+                        while (sort_array.value(j) > k)
+                        {
+                            if (j>1)
+                                j--;
+                            else
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        while (sort_array.value(j) < k)
+                        {
+                            if (j>1)
+                                j--;
+                            else
+                                break;
+                        }
+                    }
+                }
+
+                if (j <= i)
+                {
+                    if (j!=n)
+                    {
+                        tmp = sort_array.value(j);
+                        sort_array.value(j,sort_array.value(n));
+                        sort_array.value(n,tmp);
+                    }
+
+                    break;
+                }
+
+                else
+                {
+                    tmp = sort_array.value(j);
+                    sort_array.value(j,sort_array.value(i));
+                    sort_array.value(i,tmp);
+                }
+            }
+
+            if (r-j >= j-n && j - n > m)
+            {
+                stack_element = conPoke(stack_element,1,j+1);
+                stack_element = conPoke(stack_element,#ConPos2,r);
+                stack = conIns(stack,conLen(stack)+1,stack_element);
+                r = j - 1;
+                continue;
+            }
+            if (r-j < j-n && r - j > m)
+            {
+                stack_element = conPoke(stack_element,1,n);
+                stack_element = conPoke(stack_element,#ConPos2,j-1);
+                stack = conIns(stack,conLen(stack)+1,stack_element);
+                n = j + 1;
+                continue;
+            }
+            if (r-j > m && m >= j-n)
+            {
+                n = j + 1;
+                continue;
+            }
+            if (j-n > m && m >= r-j)
+            {
+                r = j - 1;
+                continue;
+            }
+
+            if (conLen(stack))
+            {
+                n = conPeek(conPeek(stack,conLen(stack)),1);
+                r = conPeek(conPeek(stack,conLen(stack)),#ConPos2);
+                stack = conDel(stack,conLen(stack),1);
+                continue;
+            }
+            else
+                break;
+        }
+        return sort_array;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>typeId</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Returns type of array's elements
+    /// </summary>
+    /// <returns>
+    /// A Types system enumeration value
+    /// </returns>
+    public Types typeId()
+    {
+        return implementation.typeId();
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>value</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Sets and gets of element's value
+    /// </summary>
+    /// <param name="_index">
+    /// Index of array's element
+    /// </param>
+    /// <param name="_value">
+    /// Value to set to element
+    /// </param>
+    /// <returns>
+    /// Element's value
+    /// </returns>
+    public anytype value(int _index, anytype _value = 0)
+    {
+        if (! prmisDefault(_value))
+        {
+            return implementation.value(_index, _value);
+        }
+        return implementation.value(_index);
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>createAndInit</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Creates new instance of <c>ArrayExtend_RU</c> and
+    /// initializes array's elements from container
+    /// </summary>
+    /// <param name="_type">
+    /// Type of array's elements
+    /// </param>
+    /// <param name="_noOfInitializeElements">
+    /// Number of elements for initialization
+    /// </param>
+    /// <param name="_conData">
+    /// Container of element's value
+    /// </param>
+    /// <returns>
+    /// Instance of <c>ArrayExtend_RU</c>
+    /// </returns>
+    static public ArrayTest createAndInit(Types _type, int _noOfInitializeElements = 0, container _conData = conNull())
+    {
+        ArrayTest  arrayExtend = new ArrayTest(_type);
+        int             idx;
+        if (_conData != conNull())
+        {
+            for (idx = 1; idx <= conLen(_conData); idx++)
+            {
+                arrayExtend.value(idx, conPeek(_conData, idx));
+            }
+        }
+        return arrayExtend;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

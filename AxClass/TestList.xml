@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>TestList</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+class TestList
+{        
+
+    private List integerList;
+    private ListEnumerator enumerator;
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>main</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Runs the class with the specified arguments.
+    /// </summary>
+    /// <param name = "_args">The specified arguments.</param>
+    public static void main(Args _args)
+    {        
+
+        TestList list = new TestList();
+        list.run();
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>run</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Does the testing on the TestList
+    /// </summary>
+    public void run() {
+        // declare and initialize the list
+        this.integerList = new List(Types::Integer);
+
+        // add values
+        this.addElements();
+
+        // get enumerator and reset it to first element
+        this.enumerator = this.integerList.getEnumerator();
+        this.enumerator.reset();
+
+        this.enumerateAndPrint();
+        this.enumerateAndPrint();
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>addElements</Name>
+				<Source><![CDATA[
+    ///<summary>
+    /// Adds test data to the list
+    /// List must be instanziated beforehand
+    ///</summary>
+    private void addElements()
+    {
+        this.integerList.addEnd(2);
+        this.integerList.addEnd(3);
+        this.integerList.addStart(1);
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>enumerateAndPrint</Name>
+				<Source><![CDATA[
+    /// <summary> 
+    /// gets the next element by calling moveNext() on the enumerator, prints the value to info
+    /// </summary>
+    private void enumerateAndPrint() {
+        this.enumerator.moveNext();
+        info(strFmt("Current Enumerator value is %1", this.enumerator.current()));
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>
